@@ -21,7 +21,7 @@ struct Shape
         os << " Вершин в фигуре: " << shape.numOfVertices << endl;
 
         for (auto vertex : shape.vertices) {
-            os << "[x:" << vertex.x << " y:" << vertex.y << "]";
+            os << "[X:" << vertex.x << " Y:" << vertex.y << "]";
         }
         os << endl;
 
