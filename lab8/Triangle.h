@@ -1,0 +1,4 @@
+#ifndef LAB8_TRIANGLE_H
+#define LAB8_TRIANGLE_H
+
+#endif //LAB8_TRIANGLE_H
