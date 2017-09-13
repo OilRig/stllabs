@@ -20,10 +20,38 @@
 // Фомин С. (группа 23531/21) //
 ////////////////////////////////
 
+#include <vector>
 #include <iostream>
+
+#include "Functor.h"
 
 using namespace std;
 
 int main() {
-    cout << "hw";
+    for (int i = 0; i < 5; ++i)
+    {
+        Functor functor;
+        vector<int> vector(5);
+
+        // Заполняем вектор случайными числами
+        generate(vector.begin(), vector.end(), []() {
+            int
+                min = 30,
+                max = 100;
+
+            return min + rand() % (++max - min);
+        });
+
+        // Выводим вектор на экран
+        for (auto num : vector) {
+            cout << num << " ";
+        }
+
+        cout << endl;
+
+        // Собираем и выводим статистику на экран
+        functor = for_each(vector.begin(), vector.end(), functor);
+
+        cout << functor;
+    }
 }
