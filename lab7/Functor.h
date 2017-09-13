@@ -52,19 +52,20 @@ public:
         sameEnds = (firstElement == number);
     }
 
-    friend ostream & operator << (ostream &os, Functor &sf) {
-        os << "Статистика:"
-           << "\nМинимальное число: " << sf.minimum
-           << "\nМаксимальное число: " << sf.maximum
-           << "\nСреднее число: " << sf.average
-           << "\nКоличество положительных чисел: " << sf.positives
-           << "\nКоличество отрицательных чисел: " << sf.negatives
-           << "\nСумма нечетных элементов: " << sf.sumOfOdd
-           << "\nСумма четных элементов: " << sf.sumOfEven
-           << "\nКонцы последовательности"
-           << (sf.sameEnds ? " совпадают" : " различаются") << endl << endl;
+    Functor& render() {
+        cout
+            << "\nСтатистика:"
+            << "\nМинимальное число: " << minimum
+            << "\nМаксимальное число: " << maximum
+            << "\nСреднее число: " << average
+            << "\nКоличество положительных чисел: " << positives
+            << "\nКоличество отрицательных чисел: " << negatives
+            << "\nСумма нечетных элементов: " << sumOfOdd
+            << "\nСумма четных элементов: " << sumOfEven
+            << "\nКонцы последовательности"
+            << (sameEnds ? " совпадают" : " различаются") << "\n\n";
 
-        return os;
+        return *this;
     }
 };
 

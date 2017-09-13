@@ -50,8 +50,6 @@ int main() {
         cout << endl;
 
         // Собираем и выводим статистику на экран
-        functor = for_each(vector.begin(), vector.end(), functor);
-
-        cout << functor;
+        functor = for_each(vector.begin(), vector.end(), functor).render();
     }
 }
