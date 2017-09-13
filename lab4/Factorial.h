@@ -9,7 +9,7 @@ using namespace std;
 class Factorial
 {
     private:
-        int size;
+        int _size;
     
         int calcFactorial(int number)
         {
@@ -27,12 +27,11 @@ class Factorial
         class iterator : std::iterator<std::bidirectional_iterator_tag, int>
         {
             private:
-                int cursor = 0;
+                int cursor = 1;
                 int value = 1;
             
                 void goBackward()
                 {
-                    if (cursor < 0) return;
                     value = (--cursor <= 1) ? 1 : (value / (cursor + 1));
                 }
             
@@ -43,8 +42,8 @@ class Factorial
             public:
                 typedef Factorial::iterator fIterator;
             
-                iterator() {};
-                ~iterator() {};
+                iterator() = default;
+                ~iterator() = default;
 
                 iterator(int cursor, int value)
                 {
@@ -62,7 +61,7 @@ class Factorial
                     return rhs.cursor != cursor;
                 };
 
-                fIterator operator = (const fIterator &it)
+                fIterator& operator = (const fIterator &it)
                 {
                     cursor = it.cursor;
                     value = it.value;
@@ -88,11 +87,6 @@ class Factorial
                     
                     return *this;
                 };
-            
-                void prev()
-                {
-                    goBackward();
-                }
 
                 fIterator operator ++ (int)
                 {
@@ -113,7 +107,7 @@ class Factorial
 
         Factorial()
         {
-            this->size = 10;
+            this->_size = 10;
         };
 
         iterator begin()
@@ -123,14 +117,14 @@ class Factorial
 
         iterator end()
         {
-            int pastEndPosition = size + 1;
+            int pastEndPosition = _size + 1;
             
             return iterator(pastEndPosition, calcFactorial(pastEndPosition));
         };
 
         size_t getSize()
         {
-            return size + 1;
+            return static_cast<size_t>(_size) + 1;
         };
 };
 

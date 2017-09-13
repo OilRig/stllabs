@@ -38,10 +38,9 @@ int main() {
     Factorial factorial;
     
     cout << "Проход по контейнеру вперед:" << endl;
-
-    // TODO: Начинает с 0!, а по заданию надо с 1!
-    for (auto it = factorial.begin(); it != factorial.end(); ++it) {
-        cout << *it << SPACE;
+    
+    for (int it : factorial) {
+        cout << it << SPACE;
     }
     
     cout << endl;
@@ -50,7 +49,7 @@ int main() {
     
     cout << "Проход по контейнеру назад:" << endl;
     
-    for (auto it = --factorial.end(); it != factorial.begin(); --it) {
+    for (auto it = --factorial.end(); it != --factorial.begin(); --it) {
         cout << *it << SPACE;
     }
     
