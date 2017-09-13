@@ -51,7 +51,8 @@ Text parseText(const string inputText)
                 
                 break;
             }
-                
+
+            case UNDEFINED_CHAR:
             case SPACE_CHAR: {
                 if (!reachedWordBoundary) {
                     reachedWordBoundary = true;
@@ -62,7 +63,7 @@ Text parseText(const string inputText)
                 
                 break;
             }
-                
+
             case PUNCT_CHAR: {
                 if (!reachedWordBoundary) {
                     reachedWordBoundary = true;

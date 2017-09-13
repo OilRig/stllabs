@@ -58,6 +58,7 @@ int main()
 {
     // Пункт 1
     string inputText = readFileToString();
+    cout << inputText;
 
     // Пункт 2
     Text parsedText = parseText(inputText);

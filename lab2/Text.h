@@ -40,8 +40,10 @@ public:
         ) {
             _elements.pop_back();
         }
-        
-        _elements.push_back(element);
+
+        if (element.value.length() > 0) {
+            _elements.push_back(element);
+        }
     }
     
     vector<string> toFixedWidth()
