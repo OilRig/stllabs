@@ -32,7 +32,7 @@ class QueueWithPriority
     private:
         elementList _hPriority, _nPriority, _lPriority;
     public:
-        void putElementToQueue(const QueueElement &, const ElementPriority);
+        void putElementToQueue(const QueueElement &, ElementPriority);
         QueueElement getElementFromQueue();
         QueueWithPriority accelerate();
         QueueWithPriority render();
@@ -45,7 +45,7 @@ QueueWithPriority QueueWithPriority::render()
     };
     
     for (auto list : priorityLists) {
-        for (auto element : *list) {
+        for (const auto &element : *list) {
             cout << element.name << SPACE;
         }
     }
@@ -58,7 +58,7 @@ QueueWithPriority QueueWithPriority::render()
 void QueueWithPriority::putElementToQueue(
     const QueueElement &element, const ElementPriority priority)
 {
-    elementList *targetList;
+    elementList *targetList = nullptr;
     
     switch (priority) {
         case HIGH: targetList = &_hPriority; break;
@@ -71,13 +71,13 @@ void QueueWithPriority::putElementToQueue(
 
 QueueElement QueueWithPriority::getElementFromQueue()
 {
-    QueueElement element;
+    QueueElement element = QueueElement();
     vector<elementList*> priorityLists = {
         &_hPriority, &_nPriority, &_lPriority
     };
     
     for (auto list : priorityLists) {
-        if (list->size() > 0) {
+        if (!list->empty()) {
             element = list->front();
             list->pop_front();
             

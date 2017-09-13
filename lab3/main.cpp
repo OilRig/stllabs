@@ -98,7 +98,7 @@ int main() {
         queue.putElementToQueue(element.element, element.priority);
     }
 
-    queue
+     queue
         .render()
         .accelerate()
         .render();
@@ -110,7 +110,7 @@ int main() {
     cout << endl;
     
     for (auto listLength : listLengths) {
-        fillList(randList, listLength);
+        fillList(randList, static_cast<size_t>(listLength));
         
         if (randList.empty()) {
             continue;
