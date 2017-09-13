@@ -86,14 +86,13 @@ int main()
     printTable(dsVector, "Вектор заполнен:");
 
     // Пункт 3
-// TODO: Сортировка без либы алгоритмов это странно
     sort(dsVector.begin(), dsVector.end(), [](
         const DataStruct &lhs, const DataStruct &rhs)
     {
         int
             lkey1 = lhs.key1, lkey2 = lhs.key2, lstr = (int) lhs.str.size(),
             rkey1 = rhs.key1, rkey2 = rhs.key2, rstr = (int) rhs.str.size();
-        
+
         if (lkey1 < rkey1) {
             return true;
         }
@@ -101,11 +100,11 @@ int main()
         if (lkey1 == rkey1 && lkey2 < rkey2) {
             return true;
         }
-        
+
         if (lkey1 == rkey1 && lkey2 == rkey2 && lstr < rstr) {
             return true;
         }
-        
+
         return false;
     });
 
