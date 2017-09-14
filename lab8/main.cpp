@@ -58,6 +58,14 @@
 
 using namespace std;
 
+void drawAllShapes(const list<Shape*> &shapes)
+{
+    cout << endl;
+    for_each(shapes.begin(), shapes.end(), [](Shape* shape) {
+        shape->draw();
+    });
+}
+
 int main() {
     // Пункт 0
     list<double> listOfDoubles = {
@@ -79,38 +87,49 @@ int main() {
 
     // Пункты 1:2
     Triangle
-        tri0(12,34),
         tri1(11,12),
         tri2(02,04);
 
     Square
-        sqa0(52,67),
         sqa1(12,35),
         sqa2(56,24);
 
     Circle
-        cir0(98,25),
         cir1(56,49),
         cir2(33,92);
 
     list<Shape*> shapes = {
-        &tri0, &tri1, &tri2, &sqa0, &sqa1, &sqa2, &cir0, &cir1, &cir2
+        &tri1, &tri2, &sqa1, &sqa2, &cir1, &cir2
     };
 
     // Пункт 3
-    for_each(shapes.begin(), shapes.end(), [](Shape* shape) {
-        shape->draw();
-    });
+    drawAllShapes(shapes);
 
-    // Пункты 4:7
-    shapes.sort([] (Shape* lhs, Shape* rhs) {
+    // Пункт 4
+    shapes.sort([](Shape* lhs, Shape* rhs) {
         return lhs->isMoreLeft(*rhs);
     });
 
-    cout << "После сортировки" << endl << endl;
+    drawAllShapes(shapes);
 
-    // Вывод
-    for_each(shapes.begin(), shapes.end(), [](Shape* shape) {
-        shape->draw();
+    // Пункт 5
+    shapes.sort([](Shape* lhs, Shape* rhs) {
+        return !lhs->isMoreLeft(*rhs);
     });
+
+    drawAllShapes(shapes);
+
+    // Пункт 6
+    shapes.sort([](Shape* lhs, Shape* rhs) {
+        return lhs->isUpper(*rhs);
+    });
+
+    drawAllShapes(shapes);
+
+    // Пункт 7
+    shapes.sort([](Shape* lhs, Shape* rhs) {
+        return !lhs->isUpper(*rhs);
+    });
+
+    drawAllShapes(shapes);
 }
