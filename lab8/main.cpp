@@ -31,8 +31,7 @@
  * 3) С помощью стандартных алгоритмов и адаптеров выводит (Draw) все фигуры
  *
  * 4) С помощью стандартных алгоритмов и адаптеров сортирует список по положению
- * центра слева-направо (имется в виду, что в начале списка должны идти фигуры
- * находящиеся левее, координата x ) и выводит фигуры (Draw)
+ * центра слева-направо и выводит фигуры
  *
  * 5) С помощью стандартных алгоритмов и адаптеров сортирует список по положению
  * центра справа-налево и выводит фигуры
@@ -50,10 +49,58 @@
 
 #include <iostream>
 #include <cmath>
-#include <vector>
+#include <list>
+
+#include "Shape.h"
+#include "Triangle.h"
+#include "Square.h"
+#include "Circle.h"
 
 using namespace std;
 
 int main() {
     // Пункт 0
+    list<double> listOfDoubles = {
+        10.0, 5.0, 2.34, 5.232, 2.0
+    };
+
+    transform(
+        listOfDoubles.begin(),
+        listOfDoubles.end(),
+        listOfDoubles.begin(),
+        bind2nd(multiplies<double>(), M_PI)
+    );
+
+    for (auto num : listOfDoubles) {
+        cout << num << " ";
+    }
+
+    cout << endl;
+
+    // Пункты 1:2
+    Triangle
+        tri0(12,34),
+        tri1(11,12),
+        tri2(02,04);
+
+    Square
+        sqa0(52,67),
+        sqa1(12,35),
+        sqa2(56,24);
+
+    Circle
+        cir0(98,25),
+        cir1(56,49),
+        cir2(33,92);
+
+    list<Shape*> shapes = {
+        &tri0, &tri1, &tri2, &sqa0, &sqa1, &sqa2, &cir0, &cir1, &cir2
+    };
+
+    // Пункт 3
+    for_each(shapes.begin(), shapes.end(), [](Shape* shape) {
+        shape->draw();
+    });
+
+    // Пункты 4:7
 }
