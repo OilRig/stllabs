@@ -103,4 +103,14 @@ int main() {
     });
 
     // Пункты 4:7
+    shapes.sort([] (Shape* lhs, Shape* rhs) {
+        return lhs->isMoreLeft(*rhs);
+    });
+
+    cout << "После сортировки" << endl << endl;
+
+    // Вывод
+    for_each(shapes.begin(), shapes.end(), [](Shape* shape) {
+        shape->draw();
+    });
 }
