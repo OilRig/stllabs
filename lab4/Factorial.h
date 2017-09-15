@@ -124,7 +124,7 @@ class Factorial
 
         size_t getSize()
         {
-            return static_cast<size_t>(_size) + 1;
+            return static_cast<size_t>(_size);
         };
 };
 

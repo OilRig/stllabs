@@ -58,7 +58,7 @@ int main() {
     vector<int> vector(factorial.getSize());
     copy(factorial.begin(), factorial.end(), vector.begin());
 
-    cout << "Проход по вектору:" << endl;
+    cout << "Вектор:" << endl;
     
     for_each(vector.begin(), vector.end(), [] (int number) {
         cout << number << SPACE;
