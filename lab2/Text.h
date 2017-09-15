@@ -1,6 +1,8 @@
 #ifndef Text_h
 #define Text_h
 
+#include <iostream>
+
 #define WOW "Vau!!!"
 #define SPACE " "
 
