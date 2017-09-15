@@ -70,12 +70,12 @@ int randomIntBetween(int min, int max)
 
 int main()
 {
-    vector<DataStruct> dsVector(5);
+    vector<DataStruct> vec(5);
 
     // Пункт 1
-    for_each(dsVector.begin(), dsVector.end(), [](DataStruct &ds)
+    for_each(vec.begin(), vec.end(), [](DataStruct &dataStruct)
     {
-        ds = {
+        dataStruct = {
             randomIntBetween(-5, 5),
             randomIntBetween(-5, 5),
             strings[randomIntBetween(0, 9)]
@@ -83,12 +83,10 @@ int main()
     });
 
     // Пункт 2
-    printTable(dsVector, "Вектор заполнен:");
+    printTable(vec, "Вектор заполнен:");
 
     // Пункт 3
-    sort(dsVector.begin(), dsVector.end(), [](
-        const DataStruct &lhs, const DataStruct &rhs)
-    {
+    sort(vec.begin(), vec.end(), [](DataStruct &lhs, DataStruct &rhs) {
         int
             lkey1 = lhs.key1, lkey2 = lhs.key2, lstr = (int) lhs.str.size(),
             rkey1 = rhs.key1, rkey2 = rhs.key2, rstr = (int) rhs.str.size();
@@ -109,6 +107,6 @@ int main()
     });
 
     // Пункт 4
-    printTable(dsVector, "Вектор отсортирован:");
+    printTable(vec, "Вектор отсортирован:");
 }
 
