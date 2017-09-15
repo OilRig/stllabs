@@ -1,12 +1,13 @@
 #ifndef Parser_h
 #define Parser_h
 
-#define PUNCT_CHAR     0
-#define WORD_CHAR      1
-#define SPACE_CHAR     2
-#define UNDEFINED_CHAR 3
-
 #include "WordList.h"
+
+enum SymbolTypes {
+    Punctuation,
+    Word,
+    Space
+};
 
 int classifySymbol(const char symbol)
 {
@@ -15,21 +16,17 @@ int classifySymbol(const char symbol)
         spaceChars = "	 ",
         wordChars = "abcdefghijklmnopqrstuvwxyz0123456789";
     
-    auto npos = string::npos;
+    auto nullPos = string::npos;
 
-    if (punctChars.find(symbol) != npos) {
-        return PUNCT_CHAR;
-    }
-
-    if (spaceChars.find(symbol) != npos) {
-        return SPACE_CHAR;
+    if (punctChars.find(symbol) != nullPos) {
+        return Punctuation;
     }
     
-    if (wordChars.find(static_cast<char>(tolower(symbol))) != npos) {
-        return WORD_CHAR;
+    if (wordChars.find(static_cast<char>(tolower(symbol))) != nullPos) {
+        return Word;
     }
-    
-    return UNDEFINED_CHAR;
+
+    return Space;
 }
 
 WordList parseText(const string inputText)
@@ -46,14 +43,14 @@ WordList parseText(const string inputText)
         }
 
         switch (classifySymbol(symbol)) {
-            case WORD_CHAR: {
+            case Word: {
                 reachedWordBoundary = false;
                 word += symbol;
 
                 break;
             }
 
-            case SPACE_CHAR: {
+            case Space: {
                 if (!reachedWordBoundary) {
                     reachedWordBoundary = true;
 
@@ -63,7 +60,7 @@ WordList parseText(const string inputText)
                 break;
             }
 
-            case PUNCT_CHAR: {
+            case Punctuation: {
                 if (!reachedWordBoundary) {
                     reachedWordBoundary = true;
 

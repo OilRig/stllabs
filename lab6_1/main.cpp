@@ -43,7 +43,6 @@ int main() {
 
     // Пункт 2
     WordList words = parseText(inputText);
-    words.render();
 
     // Пункт 3
     words.unique().render();

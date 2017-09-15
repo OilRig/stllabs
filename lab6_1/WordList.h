@@ -1,7 +1,7 @@
 #ifndef Text_h
 #define Text_h
 
-#define SPACE " "
+#define CANONICAL_SPACE " "
 
 #include <string>
 #include <vector>
@@ -24,31 +24,20 @@ public:
         this->_elements = _elements;
     }
 
-    WordList render()
+    void render()
     {
         for (auto &_element : _elements) {
-            cout << _element << SPACE;
+            cout << _element << CANONICAL_SPACE;
         }
 
         cout << endl << endl;
-
-        return *this;
     }
 
     WordList unique()
     {
         auto unique = _elements;
 
-        /**
-         * std::unique() сдвигает повторяющиеся соседние элементы в конец
-         * вектора, возаращая итератор на начало области вектора, где хранятся
-         * дубли, поэтому сначала я сортирую вектор
-         */
         sort(unique.begin(), unique.end());
-
-        /**
-         * И только потом стираю, с итератора возвращенного unique и до конца
-         */
         unique.erase(
             std::unique(unique.begin(), unique.end()),
             unique.end()
