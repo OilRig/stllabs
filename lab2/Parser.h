@@ -1,83 +1,70 @@
 #ifndef Parser_h
 #define Parser_h
 
-#define PUNCT_CHAR     0
-#define WORD_CHAR      1
-#define SPACE_CHAR     2
-#define UNDEFINED_CHAR 3
-
 #include "Text.h"
 
 int classifySymbol(const char symbol)
 {
     string
         punctChars = ".,:;!?",
-        spaceChars = "	 ",
         wordChars = "abcdefghijklmnopqrstuvwxyz0123456789";
     
-    auto npos = string::npos;
+    auto null = string::npos;
     
-    if (punctChars.find(symbol) != npos) {
-        return PUNCT_CHAR;
+    if (punctChars.find(symbol) != null) {
+        return Punctuation;
     }
     
-    if (spaceChars.find(symbol) != npos) {
-        return SPACE_CHAR;
+    if (wordChars.find((char) tolower(symbol)) != null) {
+        return Word;
     }
     
-    if (wordChars.find((char) tolower(symbol)) != npos) {
-        return WORD_CHAR;
-    }
-    
-    return UNDEFINED_CHAR;
+    return Space;
 }
 
 Text parseText(const string inputText)
 {
     bool reachedWordBoundary = true;
     Text parsedText;
-    string word = "";
+    string letters;
     
     for(char symbol : inputText) {
-        
         if (reachedWordBoundary) {
-            word = "";
+            letters = "";
         }
         
         switch (classifySymbol(symbol)) {
-            case WORD_CHAR: {
+            case Word: {
                 reachedWordBoundary = false;
-                word += symbol;
+                letters += symbol;
                 
                 break;
             }
 
-            case UNDEFINED_CHAR:
-            case SPACE_CHAR: {
+            case Space: {
                 if (!reachedWordBoundary) {
                     reachedWordBoundary = true;
 
-                    parsedText.addElement({ElementType::Word, word});
-                    parsedText.addElement({ElementType::Space});
+                    parsedText.addElement({Word, letters});
+                    parsedText.addElement({Space});
                 }
                 
                 break;
             }
 
-            case PUNCT_CHAR: {
+            case Punctuation: {
                 if (!reachedWordBoundary) {
                     reachedWordBoundary = true;
-                    
-                    parsedText.addElement({ElementType::Word, word});
-                    
+
+                    parsedText.addElement({Word, letters});
                 }
                 
                 parsedText.addElement({
-                    ElementType::PunctuationMark,
+                    Punctuation,
                     string(1, symbol)
                 });
                 
-                parsedText.addElement({ElementType::Space});
+                parsedText.addElement({Space});
                 
                 break;
             }
@@ -88,6 +75,5 @@ Text parseText(const string inputText)
     
     return parsedText;
 }
-
 
 #endif /* Parser_h */

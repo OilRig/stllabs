@@ -4,14 +4,14 @@
 #include <iostream>
 
 #define WOW "Vau!!!"
-#define SPACE " "
+#define CANONIC_SPACE " "
 
 using namespace std;
 
 // Перечисление с типами элементов текста
 enum ElementType {
     Word,
-    PunctuationMark,
+    Punctuation,
     Space
 };
 
@@ -28,18 +28,15 @@ private:
 public:
     void addElement(TextElement element)
     {
-        if (element.type == ElementType::Word && element.value.length() > 10) {
+        if (element.type == Word && element.value.length() > 10) {
             element.value = WOW;
         }
         
-        if (element.type == ElementType::Space) {
-            element.value = SPACE;
+        if (element.type == Space) {
+            element.value = CANONIC_SPACE;
         }
         
-        if (
-            element.type == ElementType::PunctuationMark &&
-            _elements.back().type == ElementType::Space
-        ) {
+        if (element.type == Punctuation && _elements.back().type == Space) {
             _elements.pop_back();
         }
 
@@ -52,31 +49,28 @@ public:
     {
         vector<string> output;
         
-        string line = "", elementValue;
-        int lineLengthLeft = 40, elementLength;
+        string line, elementValue;
+        int lengthLeft = 40, elementLength;
         
         for (auto it = _elements.begin(); it != _elements.end(); ++it)
         {
             elementValue = it->value;
             elementLength = (int) elementValue.length();
             
-            if (
-                lineLengthLeft - elementLength > 0 &&
-                it != prev(_elements.end())
-            ) {
+            if (lengthLeft - elementLength > 0 && it != prev(_elements.end())) {
                 line += elementValue;
-                lineLengthLeft -= elementLength;
+                lengthLeft -= elementLength;
             } else {
                 output.push_back(line);
+                lengthLeft = 40;
                 line = "";
-                lineLengthLeft = 40;
             }
         }
         
         return output;
     }
-    
-    Text render()
+
+    void render()
     {
         for (auto it = _elements.begin(); it != _elements.end(); ++it)
         {
@@ -84,8 +78,6 @@ public:
         }
         
         cout << endl << endl;
-        
-        return *this;
     }
 };
 
