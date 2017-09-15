@@ -39,7 +39,7 @@ using namespace std;
 
 int randInt(int min, int max)
 {
-    return min + rand() % (++max - min);
+    return min + rand() % (++max - min); // NOLINT
 }
 
 /**
