@@ -5,16 +5,14 @@
 #include <list>
 #include <vector>
 
-#define SPACE " "
-
 using namespace std;
 
-typedef enum
+enum ElementPriority
 {
     LOW,
     NORMAL,
     HIGH
-} ElementPriority;
+};
 
 struct QueueElement {
     string name;
@@ -38,9 +36,9 @@ class QueueWithPriority
             elementList *targetList = nullptr;
 
             switch (priority) {
-                case HIGH: targetList = &_hPriority; break;
+                case HIGH:   targetList = &_hPriority; break;
                 case NORMAL: targetList = &_nPriority; break;
-                case LOW: targetList = &_lPriority; break;
+                case LOW:    targetList = &_lPriority; break;
             }
 
             targetList->push_back(element);
@@ -67,7 +65,10 @@ class QueueWithPriority
 
         QueueWithPriority& accelerate()
         {
-            _hPriority.splice(_hPriority.end(), _lPriority);
+            _hPriority.splice(
+                _hPriority.end(),
+                _lPriority
+            );
 
             return *this;
         };
@@ -80,7 +81,7 @@ class QueueWithPriority
 
             for (auto list : priorityLists) {
                 for (const auto &element : *list) {
-                    cout << element.name << SPACE;
+                    cout << element.name << " ";
                 }
             }
 

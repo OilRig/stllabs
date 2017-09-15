@@ -19,7 +19,7 @@ void printListReq(list<int> list, bool direction = true)
         return;
     }
     
-    cout << (direction ? list.front() : list.back()) << SPACE;
+    cout << (direction ? list.front() : list.back()) << " ";
     
     if (direction) {
         list.pop_front();
@@ -33,7 +33,7 @@ void printListReq(list<int> list, bool direction = true)
 void printList(list<int> &list)
 {
     for (auto element : list) {
-        cout << element << SPACE;
+        cout << element << " ";
     }
     
     cout << endl;
