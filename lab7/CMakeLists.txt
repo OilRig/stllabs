@@ -3,5 +3,5 @@ project(lab7)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Functor.h)
+set(SOURCE_FILES main.cpp StatFunctor.h)
 add_executable(lab7 ${SOURCE_FILES})

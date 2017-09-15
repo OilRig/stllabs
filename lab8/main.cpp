@@ -76,7 +76,7 @@ int main() {
         listOfDoubles.begin(),
         listOfDoubles.end(),
         listOfDoubles.begin(),
-        bind2nd(multiplies<double>(), M_PI)
+        bind1st(multiplies<double>(), M_PI)
     );
 
     for (auto num : listOfDoubles) {

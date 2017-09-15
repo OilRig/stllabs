@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Functor
+class StatFunctor
 {
 private:
     int maximum = 0,
@@ -15,19 +15,21 @@ private:
         sumOfOdd = 0,
         sumOfEven = 0,
         firstElement = 0,
-        allAmount = 0;
+        size = 0;
 
     double
         average = 0;
     bool
         sameEnds = false;
 public:
-    Functor() = default;
+    StatFunctor() = default;
 
     void operator () (int number) {
-        if (allAmount == 0) {
+        if (size == 0) {
             firstElement = minimum = maximum = number;
         }
+
+        ++size;
 
         if (number > maximum) {
             maximum = number;
@@ -35,7 +37,7 @@ public:
             minimum = number;
         }
 
-        average = (allAmount * average + number) / ++allAmount;
+        average = (size * average + number) / size;
 
         if (number > 0) {
             ++positives;
@@ -52,7 +54,7 @@ public:
         sameEnds = (firstElement == number);
     }
 
-    Functor& render() {
+    StatFunctor& render() {
         cout
             << "\nСтатистика:"
             << "\nМинимальное число: " << minimum

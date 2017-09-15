@@ -23,33 +23,32 @@
 #include <vector>
 #include <iostream>
 
-#include "Functor.h"
+#include "StatFunctor.h"
 
 using namespace std;
 
 int main() {
     for (int i = 0; i < 5; ++i)
     {
-        Functor functor;
-        vector<int> vector(5);
+        vector<int> numberSet(5);
 
         // Заполняем вектор случайными числами
-        generate(vector.begin(), vector.end(), []() {
+        generate(numberSet.begin(), numberSet.end(), []() {
             int
-                min = 30,
-                max = 100;
+                min = -500,
+                max = 500;
 
-            return min + rand() % (++max - min);
+            return min + rand() % (++max - min); // NOLINT
         });
 
         // Выводим вектор на экран
-        for (auto num : vector) {
+        for (auto num : numberSet) {
             cout << num << " ";
         }
 
         cout << endl;
 
         // Собираем и выводим статистику на экран
-        functor = for_each(vector.begin(), vector.end(), functor).render();
+        for_each(numberSet.begin(), numberSet.end(), StatFunctor()).render();
     }
 }
